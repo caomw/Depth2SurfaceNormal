@@ -1,0 +1,49 @@
+% Calibrated using the RGBDemo Calibration tool:
+%   http://labs.manctl.com/rgbdemo/
+% 
+
+% The maximum depth used, in meters.
+maxDepth = 10;
+
+% RGB Intrinsic Parameters
+fx_rgb = 1;
+fy_rgb = 1;
+cx_rgb = 0;
+cy_rgb = 0;
+
+% RGB Distortion Parameters
+k1_rgb = 1;
+k2_rgb = 1;
+p1_rgb = 1;
+p2_rgb = 1;
+k3_rgb = 1;
+
+% Depth Intrinsic Parameters
+fx_d = 1;
+fy_d = 1;
+cx_d = 0;
+cy_d = 0;
+
+% RGB Distortion Parameters
+k1_d = 1;
+k2_d = 1;
+p1_d = 1;
+p2_d = 1;
+k3_d = 1;
+
+% Rotation
+R = [1, 0, 0 ...
+      0, 1, 0, ...
+      0, 0, 1];
+
+R = reshape(R, [3 3]);
+R = inv(R');
+
+% 3D Translation
+t_x = 0;
+t_z = 0;
+t_y = 0;
+
+% Parameters for making depth absolute.
+depthParam1 = 351.3;
+depthParam2 = 1092.5;
