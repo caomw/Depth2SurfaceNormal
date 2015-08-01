@@ -16,20 +16,23 @@ def main():
   with open(imgslist_fpath) as f:
     imgslist = f.read().splitlines()
 
+  fig = plt.figure()
   for im in imgslist:
     for fnum in range(1, 20):
-      outfpath = os.path.join(outdir, im + '_depth/', str(fnum) + '_vis.png')
-      if not lock(outfpath):
-        continue
+      fig.clear()
 
       try:
         Z = scipy.misc.imread(os.path.join(normalsdir, im + '_depth', 'image-%03d.png' % fnum), flatten=True)
       except IOError:
         # this image doesn't exist, continue
         continue
+
+      outfpath = os.path.join(outdir, im + '_depth/', str(fnum) + '_vis.png')
+      if not lock(outfpath):
+        continue
+
       Z = scipy.misc.imresize(Z, 0.3)
 
-      fig = plt.figure()
       ax = fig.gca(projection='3d')
       X = np.arange(0, np.shape(Z)[1], 1)
       Y = np.arange(0, np.shape(Z)[0], 1)
